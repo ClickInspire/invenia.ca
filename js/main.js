@@ -327,8 +327,6 @@ jQuery(document).ready(function($) {
 	/* Projects
 	/* ===================================================== */
 
-	var noItems = 4;
-
 	$('.portfolio').waitForImages(function() {
 		$('.portfolio').isotope({
 			itemSelector: '.port-item',
@@ -345,27 +343,6 @@ jQuery(document).ready(function($) {
 		$('.portfolio').isotope({
 			masonry: { columnWidth: $('.portfolio').width() / 4 }
 		});
-	});
-
-	// LOAD MORE ITEMS
-	$('#load-more').click( function(e) {
-		e.preventDefault();
-		
-		if( noItems < $('.port-item').length ) {
-			noItems += 4;
-		}
-		$('.port-item:lt(' + noItems + ')').addClass('showme');
-
-		$('.portfolio').isotope({
-			filter: '.showme'
-		});
-
-		
-		
-		if( noItems === $('.port-item').length ) {
-			$(this).fadeOut();
-		}
-
 	});
 
 	$('.filter-menu li').css({
@@ -390,7 +367,7 @@ $('.filter-menu li').trigger('click');
 
 		$('.showme').removeClass('showme');
 		
-		$(filter + ':lt(' + noItems + ')').addClass('showme');
+		$(filter).addClass('showme');
 
 		$('.portfolio').isotope({
 			filter: '.showme'
