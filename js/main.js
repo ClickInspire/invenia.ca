@@ -130,6 +130,10 @@ jQuery(document).ready(function($) {
 	$('.main-slider').find('.cap-anim').css({
 		visibility: 'hidden'
 	});
+	
+	var slidePlayCount = 0, 
+			playLimit = 3;
+	
 
 	//MAIN SLIDER OPTIONS
 	$('.main-slider').bxSlider({
@@ -143,11 +147,16 @@ jQuery(document).ready(function($) {
 			animCaps($('.main-slider').find('li').eq(0).find('.cap-anim'));
 		},
 		onSlideBefore: function($slideElement, oldIndex, newIndex) {
-
+			
 			animCaps($slideElement.find('.cap-anim'));
 		},
 		onSlideAfter: function($slideElement) {
-
+			slidePlayCount++;
+			
+			console.log(slidePlayCount, playLimit, $('.main-slider > li').length * playLimit);
+			if (slidePlayCount === $('.main-slider > li').length * playLimit) {
+				$('.main-slider').stopAuto();
+			}
 		}
 	});
 
@@ -222,6 +231,9 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$('.process-list li').on('click', function() {
+			$('.process-slider').goToSlide($(this).index() + 1);
+	});
 
 	/* ===================================================== */
 	/*	Init parallax
