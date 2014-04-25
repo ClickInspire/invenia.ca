@@ -136,7 +136,7 @@ jQuery(document).ready(function($) {
 	
 
 	//MAIN SLIDER OPTIONS
-	$('.main-slider').bxSlider({
+	var mainSlider = $('.main-slider').bxSlider({
 		auto: true,
 		speed: 1000,
 		pause: 8000,
@@ -155,9 +155,8 @@ jQuery(document).ready(function($) {
 			
 			slidePlayCount++;
 			
-			console.log(slidePlayCount, playLimit, $('.main-slider > li').length * playLimit);
 			if (slidePlayCount === 2) {//$('.main-slider > li').length * playLimit) {
-				that.stopAuto();
+				mainSlider.stopAuto();
 			}
 		}
 	});
@@ -219,8 +218,7 @@ jQuery(document).ready(function($) {
 	/* ===================================================== */
 	/*	Process slider
 	/* ===================================================== */
-
-	$('.process-slider').bxSlider({
+	var processSlider = $('.process-slider').bxSlider({
 		auto: true,
 		speed: 1000,
 		pause: 6000,
@@ -233,10 +231,8 @@ jQuery(document).ready(function($) {
 		}
 	});
 
-	console.log($('.process-list li').length);
 	$('.process-list li').on('click', function() {
-		console.log("here", $(this).index() + 1, $('.process-slider').goToSlide)
-			$('.process-slider').goToSlide($(this).index() + 1);
+			processSlider.goToSlide($(this).index() + 1);
 	});
 
 	/* ===================================================== */
