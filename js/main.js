@@ -151,11 +151,13 @@ jQuery(document).ready(function($) {
 			animCaps($slideElement.find('.cap-anim'));
 		},
 		onSlideAfter: function($slideElement) {
+			var that = this;
+			
 			slidePlayCount++;
 			
 			console.log(slidePlayCount, playLimit, $('.main-slider > li').length * playLimit);
-			if (slidePlayCount === $('.main-slider > li').length * playLimit) {
-				$('.main-slider').stopAuto();
+			if (slidePlayCount === 2) {//$('.main-slider > li').length * playLimit) {
+				that.stopAuto();
 			}
 		}
 	});
@@ -231,7 +233,9 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	console.log($('.process-list li').length);
 	$('.process-list li').on('click', function() {
+		console.log("here", $(this).index() + 1, $('.process-slider').goToSlide)
 			$('.process-slider').goToSlide($(this).index() + 1);
 	});
 
