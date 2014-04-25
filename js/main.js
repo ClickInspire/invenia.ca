@@ -508,40 +508,6 @@ $('.filter-menu li').trigger('click');
 			projectInit( $(this) );
 		}
 	});
-
-
-	/* ==================================================== */
-	/*	Hexigons											*/
-	/* ==================================================== */
-
-	//FUNCTIONS
-
-	var initHexs = function() {
-
-		//TO ADD SVGS
-		function SVG(tag) {
-			return document.createElementNS('http://www.w3.org/2000/svg', tag);
-		}
-
-		var createHexPoints = function(numberOfSides, size, Xcenter, Ycenter) {
-			var points;
-			var point;
-
-			for (var i = 1; i <= numberOfSides; i += 1) {
-				point = (Xcenter + size * Math.cos(i * 2 * Math.PI / numberOfSides + 11));
-
-				if (points === undefined) {
-					points = Math.floor(point + 100);
-				} else {
-					points = points + ', ' + Math.floor(point + 100);
-				}
-
-				point = (Ycenter + size * Math.sin(i * 2 * Math.PI / numberOfSides + 11));
-				points = points + ', ' + Math.floor(point + 100);
-			}
-			$('.notes').html(points);
-			return points;
-		};
 }); // End jQuery load
 
 
