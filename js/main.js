@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
 	});
 	
 	var slidePlayCount = 0, 
-			playLimit = 1;
+			playLimit = 3;
 	
 
 	//MAIN SLIDER OPTIONS

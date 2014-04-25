@@ -1165,6 +1165,10 @@ form .error:focus {
     padding-left: 30px;
 }
 
+.process-list li {
+	cursor: pointer;
+}
+
 .process-list i {
     background: #333;
     border-radius: 50%;
