@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
 	});
 	
 	var slidePlayCount = 0, 
-			playLimit = 3;
+			playLimit = 1;
 	
 
 	//MAIN SLIDER OPTIONS
@@ -155,7 +155,7 @@ jQuery(document).ready(function($) {
 			
 			slidePlayCount++;
 			
-			if (slidePlayCount === 2) {//$('.main-slider > li').length * playLimit) {
+			if (slidePlayCount === $('.main-slider > li').length * playLimit) {
 				mainSlider.stopAuto();
 			}
 		}
@@ -232,7 +232,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$('.process-list li').on('click', function() {
-			processSlider.goToSlide($(this).index() + 1);
+			processSlider.goToSlide($(this).index());
 	});
 
 	/* ===================================================== */
@@ -542,80 +542,6 @@ $('.filter-menu li').trigger('click');
 			$('.notes').html(points);
 			return points;
 		};
-
-
-		var i = 0,
-		svgHTML;
-
-		// CREATE HEXIGONS
-		$('.feature-hex').each(function() {
-
-			// Get img src and remove
-			var hexImg = $(this).find('img'),
-				imgSrc = hexImg.attr('src');
-			hexImg.remove();
-
-			// Add SVG HTML
-			svgHTML = '<svg class="svg-graphic" width="200" height="200" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">' +
-				'<g><clipPath id="hex-mask' + i + '"></clipPath></g>' +
-				'<image clip-path="url(#hex-mask' + i + ')" height="100%" width="100%" xlink:href="' + imgSrc + '" />' +
-				'</a>' +
-				'</svg>';
-			$(this).append(svgHTML);
-
-			i++;
-		});
-
-
-		var hexigonSvg = $('.svg-graphic');
-
-		// GET VIEW BOX ATTRIBUTES
-		var svg = document.getElementsByTagName('svg')[0];
-		var box = svg.getAttribute('viewBox');
-		box = box.split(' ');
-
-		// GET POINTS FOR HEX MASK
-		var numberOfSides = 6,
-			size = box[3] / 2 - 20,
-			Xcenter = box[3] / 2 - 100,
-			Ycenter = box[3] / 2 - 100;
-		var hexPoints1 = createHexPoints(numberOfSides, size, Xcenter, Ycenter);
-
-		// ADD MASK HEX
-		i = 0;
-		$('.feature-hex').each(function() {
-			var $svg = $('#hex-mask' + i);
-			$(SVG('polygon'))
-				.attr('points', hexPoints1)
-				.appendTo($svg);
-
-			i++;
-		});
-
-		// CREATE BORDER HEX
-		numberOfSides = 6;
-		size = box[3] / 2 - 2;
-		Xcenter = box[3] / 2 - 100;
-		Ycenter = box[3] / 2 - 100;
-		var hexPoints2 = createHexPoints(numberOfSides, size, Xcenter, Ycenter);
-
-
-		var $svg = $('.svg-graphic');
-		$(SVG('polygon'))
-			.attr('points', hexPoints2)
-			.attr('fill', 'none')
-			.attr('stroke', '#d0d0d0')
-			.attr('stroke-width', 2)
-			.appendTo($svg);
-
-		}; // End initHexes
-
-		// INIT HEXES - If the feature images are
-		// on the page, turn into hexs
-		if( $('.feature-imgs').length ) {
-			initHexs();
-		}
-
 }); // End jQuery load
 
 
