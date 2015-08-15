@@ -1,0 +1,142 @@
+<?xml version="1.0" ?>
+<library>
+
+  <evstudy>
+   <description>Multi-scaling of wholesale electricity prices</description>
+   <file>1</file>
+   <project>
+   <description>ArXiv pdf</description>
+   <variable>
+    <name>var1</name>
+    <value>2</value>
+    <value>3</value>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var2</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var3</name>
+    <value>2</value>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var4</name>
+    <value>1</value>
+   </variable>
+   <variable>
+    <name>var5</name>
+   </variable>
+   </project>
+  </evstudy>
+  <evstudy>
+   <description>Bounds on transient instability for complex ecosystems</description>
+   <file>2</file>
+   <project>
+   <description>Bounds on transient instability for complex ecosystems</description>
+   <variable>
+    <name>var1</name>
+    <value>2</value>
+   </variable>
+   <variable>
+    <name>var2</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var3</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var4</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var5</name>
+    <value>1</value>
+   </variable>
+    <tag>     <description>ArXiv pdf</description>
+     <pag>1</pag>
+    </tag>
+   </project>
+  </evstudy>
+  <evstudy>
+   <description>Geometric phases and cyclic isotropic cosmologies</description>
+   <file>3</file>
+   <project>
+   <description>ArXiv pdf</description>
+   <variable>
+    <name>var1</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var2</name>
+    <value>3</value>
+   </variable>
+   <variable>
+    <name>var3</name>
+   </variable>
+   <variable>
+    <name>var4</name>
+    <value>1</value>
+   </variable>
+   <variable>
+    <name>var5</name>
+   </variable>
+   </project>
+  </evstudy>
+  <evstudy>
+   <description>Ranking nodes according to their path-complexity</description>
+   <file>4</file>
+   <project>
+   <description>ArXiv pdf</description>
+   <variable>
+    <name>var1</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var2</name>
+    <value>3</value>
+   </variable>
+   <variable>
+    <name>var3</name>
+    <value>4</value>
+   </variable>
+   <variable>
+    <name>var4</name>
+    <value>1</value>
+   </variable>
+   <variable>
+    <name>var5</name>
+   </variable>
+   </project>
+  </evstudy>
+  <evstudy>
+   <description>Higher-order interference and single-system postulates characterizing quantum theory</description>
+   <file>5</file>
+   <project>
+    <description>ArXiv pdf</description>
+   <variable>
+    <name>var1</name>
+    <value>2</value>
+   </variable>
+   <variable>
+    <name>var2</name>
+    <value>2</value>
+   </variable>
+   <variable>
+    <name>var3</name>
+    <value>3</value>
+   </variable>
+   <variable>
+    <name>var4</name>
+    <value>6</value>
+   </variable>
+   <variable>
+    <name>var5</name>
+    <value>1</value>
+   </variable>
+   </project>
+  </evstudy>
+</library>
+
