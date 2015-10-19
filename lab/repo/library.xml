@@ -8,17 +8,16 @@
    <description>ArXiv pdf</description>
    <variable>
     <name>var1</name>
+    <value>3</value>
+   </variable>
+   <variable>
+    <name>var2</name>
     <value>2</value>
     <value>3</value>
     <value>4</value>
    </variable>
    <variable>
-    <name>var2</name>
-    <value>4</value>
-   </variable>
-   <variable>
     <name>var3</name>
-    <value>2</value>
     <value>4</value>
    </variable>
    <variable>
@@ -27,21 +26,29 @@
    </variable>
    <variable>
     <name>var5</name>
+    <value>2</value>
+    <value>3</value>
+    <value>4</value>
+    <value>5</value>
    </variable>
+    <tag>
+     <description>MCC Graph</description>
+     <pag>3</pag>
+    </tag>
    </project>
   </evstudy>
   <evstudy>
    <description>Bounds on transient instability for complex ecosystems</description>
    <file>2</file>
    <project>
-   <description>Bounds on transient instability for complex ecosystems</description>
+   <description>ArXiv pdf</description>
    <variable>
     <name>var1</name>
-    <value>2</value>
+    <value>3</value>
    </variable>
    <variable>
     <name>var2</name>
-    <value>4</value>
+    <value>2</value>
    </variable>
    <variable>
     <name>var3</name>
@@ -53,11 +60,8 @@
    </variable>
    <variable>
     <name>var5</name>
-    <value>1</value>
+    <value>4</value>
    </variable>
-    <tag>     <description>ArXiv pdf</description>
-     <pag>1</pag>
-    </tag>
    </project>
   </evstudy>
   <evstudy>
@@ -67,14 +71,15 @@
    <description>ArXiv pdf</description>
    <variable>
     <name>var1</name>
-    <value>4</value>
-   </variable>
-   <variable>
-    <name>var2</name>
     <value>3</value>
    </variable>
    <variable>
+    <name>var2</name>
+    <value>4</value>
+   </variable>
+   <variable>
     <name>var3</name>
+    <value>3</value>
    </variable>
    <variable>
     <name>var4</name>
@@ -82,6 +87,7 @@
    </variable>
    <variable>
     <name>var5</name>
+    <value>4</value>
    </variable>
    </project>
   </evstudy>
@@ -92,11 +98,11 @@
    <description>ArXiv pdf</description>
    <variable>
     <name>var1</name>
-    <value>4</value>
+    <value>3</value>
    </variable>
    <variable>
     <name>var2</name>
-    <value>3</value>
+    <value>4</value>
    </variable>
    <variable>
     <name>var3</name>
@@ -108,6 +114,7 @@
    </variable>
    <variable>
     <name>var5</name>
+    <value>3</value>
    </variable>
    </project>
   </evstudy>
@@ -115,10 +122,10 @@
    <description>Higher-order interference and single-system postulates characterizing quantum theory</description>
    <file>5</file>
    <project>
-    <description>ArXiv pdf</description>
+   <description>ArXiv pdf</description>
    <variable>
     <name>var1</name>
-    <value>2</value>
+    <value>3</value>
    </variable>
    <variable>
     <name>var2</name>
@@ -134,7 +141,7 @@
    </variable>
    <variable>
     <name>var5</name>
-    <value>1</value>
+    <value>2</value>
    </variable>
    </project>
   </evstudy>

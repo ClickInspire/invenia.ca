@@ -31,22 +31,12 @@
         
     }
     // the HTML code starts here
+    include 'credential.php';
     ?>
 
 
 
-<script>
-function changevalue(file,page)
-{
-    
-    
-    //now we assign the new value to the input
-    document.forms['formt'].open.value = 1;
-    document.forms['formt'].file.value = file;
-    document.forms['formt'].page.value = page;
-    
-}
-</script>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -71,23 +61,6 @@ function changevalue(file,page)
 
 <body>
 
-
-
-
-
-
-<script>
-function changevalue(file,page)
-{
-    
-    
-    //now we assign the new value to the input
-    document.forms['formt'].open.value = 1;
-    document.forms['formt'].file.value = file;
-    document.forms['formt'].page.value = page;
-    
-}
-</script>
 
 <?php
     // define variables and initialize with empty values
@@ -162,7 +135,7 @@ function changevalue(file,page)
 </section>
 
 <ul class="menu-click">
-<a href="../index.html"><li href="">HOME</li></a>
+<a href="index.php"><li href="">Home</li></a>
 
 </ul>
 
@@ -176,8 +149,26 @@ function changevalue(file,page)
 <div class="logo"><font color="#000099">Invenia</font> <font color="#3399ff">Labs</font></div>
 
 <ul id="menu">
-<li><a href="../index.html">HOME</a></li>
-
+<li><a href="index.php">Home</a></li>
+<?php
+    /* These are our valid username and passwords */
+    
+    if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        
+        if (($_COOKIE['username'] == $user) && ($_COOKIE['password'] == md5($pass))) {
+            
+            
+            echo "<li><a href=\"conf.php\">Configuration</a></li>";
+            echo "<li><a href=\"index.php?logout=1\">Logout</a></li>";
+            
+        }
+    } else {
+        
+        echo "<li><a href=\"login.php\">Login</a></li>";
+        
+    }
+    
+    ?>
 </ul>
 </div>
 
@@ -215,6 +206,15 @@ Note: Keyword search applies to project and document descriptions, not inside th
 <a href="#search" onClick="document.getElementById('advanced').style.display='block';">Show specific search criteria</a> &nbsp;&nbsp;&nbsp;
 
 <?php
+    
+    if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        
+        
+        if (($_COOKIE['username'] == $user) && ($_COOKIE['password'] == md5($pass))) {
+            $validated=1;
+            } else { $validated=0; }
+    } else { $validated=0; }
+    
     echo "<a name=\"search\">";
     echo "<div id=\"advanced\" style=\"display:none;\"><a href=\"#search\" onClick=\"document.getElementById('advanced').style.display='none';\">Hide specific search criteria</a><table>";
     
@@ -223,6 +223,10 @@ Note: Keyword search applies to project and document descriptions, not inside th
     $r=0;
     foreach($configuration->variable as $variable) {
         $r++;
+        
+        if ( strcmp($variable->description,'Permissions') || (!strcmp($variable->description,'Permissions') && ($validated==1))) {
+        
+        
         printf("<tr><td><br><a href=\"#%d\" onClick=\"document.getElementById('id%s').style.display='block';\">%s</a><br>",$r,$variable->name,$variable->description);
         
         printf("<div id=\"id%s\" style=\"display:none;\"><select multiple name=\"%s[]\"  width=\"800\" style=\"width: 800px\" size=\"7\">",$variable->name,$variable->name);
@@ -257,9 +261,21 @@ Note: Keyword search applies to project and document descriptions, not inside th
             
         }
         echo "</select><a href=\"#$r\" onClick=\"document.getElementById('id$variable->name').style.display='none';\">Hide</a></div></td></tr>";
+
         
         
+        } else {
+            printf("<tr><td><br><a href=\"#1\" onClick=\"document.getElementById('idvar1').style.display='block';\">%s</a><br>",$variable->description);
+            
+            printf("<div id=\"id%s\" style=\"display:none;\"><select multiple name=\"%s[]\"  width=\"800\" style=\"width: 800px\" size=\"7\">",$variable->name,$variable->name);
+            printf("<option value=\"3\" selected=\"selected\">%s</option>\n","Public");
+            echo "</select><a href=\"#$r\" onClick=\"document.getElementById('id$variable->name').style.display='none';\">Hide</a></div></td></tr>";
+        }
+    
+    
     }
+        
+    
     
     
     ?>
@@ -395,13 +411,13 @@ Note: Keyword search applies to project and document descriptions, not inside th
                             
                             
                             
-                            printf("<tr><td></td><td><font size=\"4\">%s</font></td><td><a href=\"%s\">Document</a></td></tr>",$evstudy->description,$myfile);
+                            printf("<br><tr><td></td><td><font size=\"4\"><i>%s</i></font></td><td><a href=\"%s\" target=\"_blank\">Document</a></td></tr>",$evstudy->description,$myfile);
                             
                             
                             if ($_POST["details"]==1) {
                                 $s=1;
                                 foreach ($evstudy->tag as $evtag) {
-                                    printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\">Go to page</a></td></tr>",$s,$evtag->description,$myfile,$evtag->pag);
+                                    printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\" target=\"_blank\">Go to page</a></td></tr>",$s,$evtag->description,$myfile,$evtag->pag);
                                     $s++;
                                 }
                             }
@@ -413,7 +429,7 @@ Note: Keyword search applies to project and document descriptions, not inside th
                         if ($_POST["details"]==1) {
                             $s=1;
                             foreach ($proj->tag as $tag) {
-                                printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\">Go to page</a></td></tr>",$s,$tag->description,$myfile,$tag->pag);
+                                printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\" target=\"_blank\">Go to page</a></td></tr>",$s,$tag->description,$myfile,$tag->pag);
                                 $s++;
                             }
                         }
@@ -426,21 +442,15 @@ Note: Keyword search applies to project and document descriptions, not inside th
                         if ($initial==0) {
                             
                             
-                            if(strpos($evstudy->file, "http")!==false) {
-                                printf("<tr><td></td><td><font size=\"4\">%s</font></td><td><a href=\"%s\">Document</a></td></tr>",$evstudy->description,$myfile);        
-                            } else {
-                                printf("<tr><td></td><td><font size=\"4\">%s</font></td><td><input type=\"submit\" action=\"%s\" name=\"submit\" value=\"Document\" onclick=\"changevalue('%s',0);\" /></td></tr>",$evstudy->description,htmlspecialchars($_SERVER["PHP_SELF"]),$myfile);    
-                                
-                            }
+                                printf("<br><tr><td></td><td><font size=\"4\"><i>%s</i></font></td><td><a href=\"%s\" target=\"_blank\">Document</a></td></tr>",$evstudy->description,$myfile);
+                       
                             
                             if ($_POST["details"]==1) {
                                 $s=1;
                                 foreach ($evstudy->tag as $evtag) {
-                                    if(strpos($evstudy->file, "http")!==false) {
-                                        printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\">Go to page</a></td></tr>",$s,$evtag->description,$myfile,$evtag->pag); 
-                                    } else {
-                                        printf("<tr><td></td><td>Tag %d: %s</td><td><input type=\"submit\" action=\"%s\" name=\"submit\" value=\"Go to page\" onclick=\"changevalue('%s',%d);\" /></td></tr>",$s,$evtag->description,$myfile,htmlspecialchars($_SERVER["PHP_SELF"]),$evtag->pag);    
-                                    }
+ 
+                                        printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\" target=\"_blank\">Go to page</a></td></tr>",$s,$evtag->description,$myfile,$evtag->pag);
+                                  
                                     $s++;
                                 }
                             }
@@ -451,11 +461,9 @@ Note: Keyword search applies to project and document descriptions, not inside th
                         if ($_POST["details"]==1) {
                             $s=1;
                             foreach ($proj->tag as $tag) {
-                                if(strpos($evstudy->file, "http")!==false) {
-                                    printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\">Go to page</a></td></tr>",$s,$tag->description,$myfile,$tag->pag);      
-                                } else {
-                                    printf("<tr><td></td><td>Tag %d: %s</td><td><input type=\"submit\"  action=\"%s\" name=\"submit\" value=\"Go to page\" onclick=\"changevalue('%s',%d);\" /></td></tr>",$s,$tag->description,$myfile,htmlspecialchars($_SERVER["PHP_SELF"]),$tag->pag);    
-                                }
+                                
+                                    printf("<tr><td></td><td>Tag %d: %s</td><td><a href=\"%s#page=%d\" target=\"_blank\">Go to page</a></td></tr><br>",$s,$tag->description,$myfile,$tag->pag);
+                             
                                 $s++;
                             }
                         }
