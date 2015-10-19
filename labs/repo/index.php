@@ -1,3 +1,18 @@
+<?php
+        include 'credential.php';
+    if (isset($_GET['logout'])) {
+        if (strcmp($folder,'localhost')) {
+            setcookie('username','',time()-60*60*24*$days,'/',false);
+            setcookie('password','',time()-60*60*24*$days,'/',false);
+            header('Location: index.php');
+        } else {
+                setcookie('username','',time()-60*60*24*$days,$folder,$webaddr);
+                setcookie('password','',time()-60*60*24*$days,$folder,$webaddr);
+            header('Location: index.php');
+            }
+        
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,6 +53,7 @@ function changevalue(file,page)
 </script>
 
 <?php
+
     // define variables and initialize with empty values
     // choose 0 if internet visualization, 1 if portable
     $visualization=1;
@@ -69,6 +85,9 @@ function changevalue(file,page)
         }
         
     }
+    
+
+    
     // the HTML code starts here
     ?>
 
@@ -110,7 +129,7 @@ function changevalue(file,page)
 </section>
 
 <ul class="menu-click">
-<a href="../index.html"><li href="">HOME</li></a>
+<a href="../index.html"><li href="">Home</li></a>
 
 </ul>
 
@@ -124,7 +143,26 @@ function changevalue(file,page)
 <div class="logo"><font color="#000099">Invenia</font> <font color="#3399ff">Labs</font></div>
 
 <ul id="menu">
-<li><a href="../index.html">HOME</a></li>
+<li><a href="../index.html">Home</a></li>
+<?php
+    /* These are our valid username and passwords */
+    
+    if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        
+        if (($_COOKIE['username'] == $user) && ($_COOKIE['password'] == md5($pass))) {
+            
+            
+            echo "<li><a href=\"conf.php\">Configuration</a></li>";
+            echo "<li><a href=\"index.php?logout=1\">Logout</a></li>";
+            
+        }
+    } else {
+        
+        echo "<li><a href=\"login.php\">Login</a></li>";
+        
+    }
+    
+    ?>
 
 </ul>
 </div>
@@ -163,58 +201,86 @@ function changevalue(file,page)
 <input type="hidden" name="page" value="">
 
 
+<a href="#search" onClick="document.getElementById('advanced').style.display='block';">Show specific search criteria</a> &nbsp;&nbsp;&nbsp;
+
 <?php
     
-    echo "<table>";
+    if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
+        
+        
+        if (($_COOKIE['username'] == $user) && ($_COOKIE['password'] == md5($pass))) {
+            $validated=1;
+        } else { $validated=0; }
+    } else { $validated=0; }
+    
+    echo "<a name=\"search\">";
+    echo "<div id=\"advanced\" style=\"display:none;\"><a href=\"#search\" onClick=\"document.getElementById('advanced').style.display='none';\">Hide specific search criteria</a><table>";
     
     //$content=utf8_encode(file_get_contents('config.xml'));
     $configuration=simplexml_load_file('config.xml');
-    
+    $r=0;
     foreach($configuration->variable as $variable) {
+        $r++;
         
-        printf("<tr><td><br>%s\n:<br>",$variable->description);
-        
-        printf("<select multiple name=\"%s[]\">",$variable->name);
-        $n=0;
-        foreach($variable->option as $option) {
-            $n++;
+        if ( strcmp($variable->description,'Permissions') || (!strcmp($variable->description,'Permissions') && ($validated==1))) {
             
-            if ($posted==0 || empty($errorvar["$variable->name"])==0 ) {
-                
-                if ($n==1) {
-                    printf("<option selected=\"selected\" value=\"%d\">%s</option>\n",$n,$option);
-                } else {
-                    printf("<option value=\"%d\">%s</option>\n",$n,$option);
-                }
-            }
-            else
-            {
-                $selectme=0;
-                foreach($_POST["$variable->name"] as $selvar) {
-                    if ($selvar==$n)
-                        $selectme=1;
-                }
-                
-                if ($selectme==1) {
-                    printf("<option value=\"%d\" selected=\"selected\">%s</option>\n",$n,$option);
-                } else {
-                    printf("<option value=\"%d\">%s</option>\n",$n,$option);
-                }
-                
-                
-            }
             
+            printf("<tr><td><br><a href=\"#%d\" onClick=\"document.getElementById('id%s').style.display='block';\">%s</a><br>",$r,$variable->name,$variable->description);
+            
+            printf("<div id=\"id%s\" style=\"display:none;\"><select multiple name=\"%s[]\"  width=\"800\" style=\"width: 800px\" size=\"7\">",$variable->name,$variable->name);
+            $n=0;
+            foreach($variable->option as $option) {
+                $n++;
+                
+                if ($posted==0 || empty($errorvar["$variable->name"])==0 ) {
+                    
+                    if ($n==1) {
+                        printf("<option selected=\"selected\" value=\"%d\">%s</option>\n",$n,$option,$n);
+                    } else {
+                        printf("<option value=\"%d\">%s</option>\n",$n,$option);
+                    }
+                }
+                else
+                {
+                    $selectme=0;
+                    foreach($_POST["$variable->name"] as $selvar) {
+                        if ($selvar==$n)
+                            $selectme=1;
+                    }
+                    
+                    if ($selectme==1) {
+                        printf("<option value=\"%d\" selected=\"selected\">%s</option>\n",$n,$option);
+                    } else {
+                        printf("<option value=\"%d\">%s</option>\n",$n,$option);
+                    }
+                    
+                    
+                }
+                
+            }
+            echo "</select><a href=\"#$r\" onClick=\"document.getElementById('id$variable->name').style.display='none';\">Hide</a></div></td></tr>";
+            
+            
+            
+        } else {
+            printf("<tr><td><br><a href=\"#1\" onClick=\"document.getElementById('idvar1').style.display='block';\">%s</a><br>",$variable->description);
+            
+            printf("<div id=\"id%s\" style=\"display:none;\"><select multiple name=\"%s[]\"  width=\"800\" style=\"width: 800px\" size=\"7\">",$variable->name,$variable->name);
+            printf("<option value=\"3\" selected=\"selected\">%s</option>\n","Public");
+            echo "</select><a href=\"#$r\" onClick=\"document.getElementById('id$variable->name').style.display='none';\">Hide</a></div></td></tr>";
         }
-        echo "</select></td></tr>";
         
         
     }
     
     
+    
+    
+    
     ?>
 
 </table>
-<br>
+<br><br><br><br><br><br><br><br><br>&nbsp;
 
 <?php
     if ($runsearch) {
