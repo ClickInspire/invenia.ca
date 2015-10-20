@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<conf>
+
+   <variable>
+<name>var1</name>
+<description>Permissions</description>
+    <option>All</option>
+     <option>Private</option>
+     <option>Public</option>
+   </variable>
+    <variable>
+<name>var2</name>
+<description>Document type</description>
+    <option>All</option>
+     <option>Research Paper</option>
+     <option>Internal</option>
+     <option>Literature</option>
+   </variable>
+    <variable>
+<name>var3</name>
+<description>Year</description>
+    <option>All</option>
+     <option>2013</option>
+     <option>2014</option>
+     <option>2015</option>
+   </variable>
+    <variable>
+<name>var4</name>
+<description>Theme</description>
+    <option>All</option>
+     <option>Energy Markets</option>
+     <option>Machine Learning</option>
+     <option>Complex Systems</option>
+     <option>Finance</option>
+     <option>Other</option>
+   </variable>
+    <variable>
+<name>var5</name>
+<description>Researcher</description>
+    <option>All</option>
+     <option>Cozmin Ududec</option>
+     <option>Ali Ashtari</option>
+     <option>Francesco Caravelli</option>
+     <option>James Requeima</option>
+     <option>Evan Haldane</option>
+     <option>Christian Steinruecken</option>
+     <option>Dave Duvenaud</option>
+   </variable>
+ </conf>
